@@ -22,7 +22,7 @@ $deviceID = (Get-WmiObject Win32_ComputerSystemProduct).UUID
 $username = $env:USERNAME
 $hostname = $env:COMPUTERNAME
 
-# -- Combined Text
+# Combined Text with proper line breaks
 $instructions = @"
 Ooops, your important files are encrypted.
 
@@ -58,7 +58,7 @@ $body.Text = $instructions
 $body.Dock = 'Fill'
 $form.Controls.Add($body)
 
-# -- Input Panel
+# Input Panel
 $inputPanel = New-Object Windows.Forms.Panel
 $inputPanel.Dock = 'Bottom'
 $inputPanel.Height = [int]($screenHeight * 0.12)
@@ -85,8 +85,21 @@ $submit.Location = New-Object Drawing.Point($keyBox.Location.X + $keyBox.Width +
 $submit.BackColor = 'DarkRed'
 $submit.ForeColor = 'White'
 
+# Modified submit action - exits on code "8840"
 $submit.Add_Click({
-    [System.Windows.Forms.MessageBox]::Show("Invalid key. Decryption failed.","Error",0,'Error')
+    if ($keyBox.Text -eq "8840") {
+        [System.Windows.Forms.MessageBox]::Show("Prank completed! Files were never actually encrypted.","Gotcha!",0,'Information')
+        $form.Close()
+    } else {
+        [System.Windows.Forms.MessageBox]::Show("Invalid key. Decryption failed.","Error",0,'Error')
+    }
+})
+
+# Allow Enter key to submit
+$keyBox.Add_KeyDown({
+    if ($_.KeyCode -eq "Enter") {
+        $submit.PerformClick()
+    }
 })
 
 $inputPanel.Controls.Add($keyLabel)
@@ -94,7 +107,7 @@ $inputPanel.Controls.Add($keyBox)
 $inputPanel.Controls.Add($submit)
 $form.Controls.Add($inputPanel)
 
-# -- Block closing
+# Block closing (except with correct code)
 $form.Add_KeyDown({
     if ($_.Alt -and $_.KeyCode -eq "F4") { $_.Handled = $true }
     if ($_.KeyCode -eq "Escape") { $_.Handled = $true }
